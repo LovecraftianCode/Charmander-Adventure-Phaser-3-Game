@@ -11,7 +11,7 @@
 
 ## Demo en vivo
 
-<img width="1002" height="720" alt="Demo" src="https://github.com/user-attachments/assets/b104272b-5236-4cc2-9501-ee25a932224e" />
+<img width="1028" height="752" alt="Grabación 2026-07-20 023820" src="https://github.com/user-attachments/assets/2c24e65f-c039-4919-b85a-d1db9ce7cd0d" />
 
 
 **¡Juega ahora!** → [Charmander Adventure en GitHub Pages](https://lovecraftiancode.github.io/Charmander-Adventure---Phaser-3-Game/)
