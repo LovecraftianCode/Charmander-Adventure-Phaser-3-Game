@@ -1,0 +1,144 @@
+/* ============================================
+   ESTILOS GENERALES
+   ============================================ */
+
+/* Reset básico y fondo de página */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+
+.game-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================
+   TÍTULO
+   ============================================ */
+
+.game-title {
+  color: #fff;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(52, 152, 219, 0.2);
+  letter-spacing: 2px;
+}
+
+.game-title span {
+  background: linear-gradient(135deg, #f1c40f, #e67e22);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   CONTENEDOR DEL  PHASER
+   ============================================ */
+
+#game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 0 30px rgba(52, 152, 219, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: #2c3e50;
+}
+
+/* El canvas de Phaser */
+#game canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 700px;
+}
+
+/* ============================================
+   INSTRUCCIONES
+   ============================================ */
+
+.game-instructions {
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.game-instructions .key {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+  color: #fff;
+}
+
+.game-instructions .arrow-keys {
+  color: #f1c40f;
+  font-weight: 600;
+}
+
+/* ============================================
+   Responsive para moviles y pantallas pequeñas
+   ============================================ */
+
+@media (max-width: 768px) {
+  .game-container {
+    padding: 15px;
+    border-radius: 12px;
+  }
+  
+  .game-title {
+    font-size: 1.8rem;
+  }
+  
+  #game canvas {
+    max-width: 100%;
+  }
+  
+  .game-instructions {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-container {
+    padding: 10px;
+  }
+  
+  .game-title {
+    font-size: 1.4rem;
+  }
+}
