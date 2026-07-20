@@ -14,7 +14,7 @@
 <img width="1002" height="720" alt="Demo" src="https://github.com/user-attachments/assets/b104272b-5236-4cc2-9501-ee25a932224e" />
 
 
-**¡Juega ahora!** → [Charmander Adventure en GitHub Pages](https://tu-usuario.github.io/charmander-adventure/)
+**¡Juega ahora!** → [Charmander Adventure en GitHub Pages](https://LovecraftianCode.github.io/Charmander-Adventure---Phaser-3-Game/)
 
 ## Tabla de Contenidos
 - [Sobre este proyecto](#sobre-este-proyecto)
