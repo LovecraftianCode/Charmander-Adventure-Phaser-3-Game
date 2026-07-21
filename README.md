@@ -52,12 +52,14 @@ A partir de esa base, he añadido mejoras como:
 | Característica | Descripción |
 |----------------|-------------|
 | **Personaje animado** | Charmander camina con 7 frames de animación |
+| **Animación de inactividad** | Charmander se duerme después de 3 segundos sin movimiento (6 frames) |
 | **Moneda giratoria** | 12 frames de animación para la moneda |
 | **Movimiento fluido** | Control con teclas de flecha |
 | **Sistema de puntuación** | +10 puntos por cada moneda recolectada |
 | **Detección de colisiones** | Física Arcade de Phaser 3 |
 | **Efecto de crecimiento** | Tween al recolectar moneda |
 | **Cambio de dirección** | Charmander voltea según la dirección |
+| **Sistema de inactividad** | Transición suave entre caminar y dormir |
 
 ## Controles
 
@@ -183,8 +185,53 @@ _handlePlayerMovement() {
   }
 }
 ```
+### Animación de inactividad (Idle)
+
+Charmander se duerme después de 3 segundos sin movimiento:
+
+```javascript
+// Configuración del temporizador
+this.idleTimer = 0;
+this.idleThreshold = 3;  // 3 segundos de inactividad
+this.isIdle = false;
+
+// Lógica de inactividad en update()
+if (isMoving) {
+  this.idleTimer = 0;
+  if (this.isIdle) {
+    this.isIdle = false;
+    this.player.anims.play('walk', true);
+  }
+} else {
+  this.idleTimer += 1/60;
+  if (this.idleTimer >= this.idleThreshold && !this.isIdle) {
+    this.isIdle = true;
+    this.player.anims.play('sleep', true);
+  }
+}
+```
+
+### Animacion dormido 
+
+```javascript
+// Creación de la animación de dormido
+this.anims.create({
+  key: 'sleep',
+  frames: [
+    { key: 'sleep1' },
+    { key: 'sleep2' },
+    { key: 'sleep3' },
+    { key: 'sleep4' },
+    { key: 'sleep5' },
+    { key: 'sleep6' }
+  ],
+  frameRate: 6,  // Más lento para simular respiración
+  repeat: -1
+});
+```
 
 ### Sistema de puntuación
+
 ```javascript
 _collectCoin() {
   // Posición aleatoria para la moneda
@@ -244,26 +291,23 @@ charmander-adventure/
 │
 └── assets/
     ├── CharAssets/           # Sprites de Charmander
-    │   ├── player1.png
+    │   ├── player1.png       # Caminando (7 frames)
     │   ├── player2.png
-    │   ├── player3.png
-    │   ├── player4.png
-    │   ├── player5.png
-    │   ├── player6.png
-    │   └── player7.png
+    │   ├── ...
+    │   ├── player7.png
+    │   │
+    │   └── sleep/            # Charmander durmiendo
+    │       ├── sleep1.png    # 6 frames de respiración
+    │       ├── sleep2.png
+    │       ├── sleep3.png
+    │       ├── sleep4.png
+    │       ├── sleep5.png
+    │       └── sleep6.png
     │
     └── CoinAssets/           # Sprites de la moneda
-        ├── coin1.png
+        ├── coin1.png         # 12 frames de animación
         ├── coin2.png
-        ├── coin3.png
-        ├── coin4.png
-        ├── coin5.png
-        ├── coin6.png
-        ├── coin7.png
-        ├── coin8.png
-        ├── coin9.png
-        ├── coin10.png
-        ├── coin11.png
+        ├── ...
         └── coin12.png
 ```
 
@@ -271,17 +315,17 @@ charmander-adventure/
 
 ### Métodos principales
 
-| Método | Función |	Descripción |
-|--------|---------|--------------|
-| preload() |	Carga de assets |	Carga imágenes del personaje y monedas |
-| create() |	Inicialización	| Crea animaciones, objetos y controles |
-| update() |	Bucle principal |	Maneja movimiento y colisiones |
-| _createAnimations() |	Animaciones |	Define animaciones de caminar y girar |
-| _createGameObjects() |	Objetos |	Crea jugador, moneda y puntuación |
-| _setupControls() |	Controles |	Configura teclas de flecha |
-| _handlePlayerMovement() |	Movimiento |	Controla el movimiento del jugador |
-| _handleCollisions() |	Colisiones |	Detecta colisiones con la moneda |
-| _collectCoin() |	Recolección |	Maneja la recolección de monedas |
+| Método | Función | Descripción |
+|--------|---------|-------------|
+| `preload()` | Carga de assets | Carga imágenes del personaje, monedas y animación de dormido |
+| `create()` | Inicialización | Crea animaciones, objetos y controles |
+| `update()` | Bucle principal | Maneja movimiento, colisiones y temporizador de inactividad |
+| `_createAnimations()` | Animaciones | Define animaciones de caminar, dormir y girar |
+| `_createGameObjects()` | Objetos | Crea jugador, moneda, puntuación y temporizador |
+| `_setupControls()` | Controles | Configura teclas de flecha |
+| `_handlePlayerMovement()` | Movimiento | Controla el movimiento y la inactividad |
+| `_handleCollisions()` | Colisiones | Detecta colisiones con la moneda |
+| `_collectCoin()` | Recolección | Maneja la recolección de monedas |
 
 ### Eventos soportados
 | Evento |	Función |	Descripción |
@@ -289,14 +333,18 @@ charmander-adventure/
 | update |	_handleCollisions	| Detección de colisiones |
 
 ### Conceptos clave aplicados
-| Concepto |	Implementación |
-| Sprites animados |	this.anims.create() y anims.play() |
-| Física Arcade |	this.physics.add.sprite() |
-| Colisiones |	this.physics.overlap() |
-| Tweens |	this.tweens.add() para efectos suaves |
-| Texto en pantalla	| this.add.text() |
-| Entrada de teclado	| this.input.keyboard.createCursorKeys() |
-| Escenas	| Clase mainScene con métodos Phaser | 
+
+| Concepto | Implementación |
+|----------|----------------|
+| **Sprites animados** | `this.anims.create()` y `anims.play()` |
+| **Animación de inactividad** | Temporizador + cambio de estado |
+| **Física Arcade** | `this.physics.add.sprite()` |
+| **Colisiones** | `this.physics.overlap()` |
+| **Tweens** | `this.tweens.add()` para efectos suaves |
+| **Texto en pantalla** | `this.add.text()` |
+| **Entrada de teclado** | `this.input.keyboard.createCursorKeys()` |
+| **Escenas** | Clase `mainScene` con métodos Phaser |
+| **Temporizadores** | Contador basado en frames (60 FPS) |
 
 ## Cómo ejecutar localmente
 

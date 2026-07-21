@@ -15,7 +15,15 @@ class mainScene {
     this.load.image('walk5', 'assets/CharAssets/player5.png');
     this.load.image('walk6', 'assets/CharAssets/player6.png');
     this.load.image('walk7', 'assets/CharAssets/player7.png');
-    
+
+    // --- Charmander - durmiendo ---
+    this.load.image('sleep1', 'assets/CharAssets/sleep/sleep1.png')
+    this.load.image('sleep2', 'assets/CharAssets/sleep/sleep2.png')
+    this.load.image('sleep3', 'assets/CharAssets/sleep/sleep3.png')
+    this.load.image('sleep4', 'assets/CharAssets/sleep/sleep4.png')
+    this.load.image('sleep5', 'assets/CharAssets/sleep/sleep5.png')
+    this.load.image('sleep6', 'assets/CharAssets/sleep/sleep6.png')
+
     // --- Moneda ---
     this.load.image('coin1', 'assets/CoinAssets/coin1.png');
     this.load.image('coin2', 'assets/CoinAssets/coin2.png');
@@ -62,6 +70,21 @@ class mainScene {
       repeat: -1
     });
 
+      // --- Charmander durmiendo (idle) ---
+  this.anims.create({
+    key: 'sleep',
+    frames: [
+      { key: 'sleep1' },
+      { key: 'sleep2' },
+      { key: 'sleep3' },
+      { key: 'sleep4' },
+      { key: 'sleep5' },
+      { key: 'sleep6' }
+    ],
+    frameRate: 8,  // Más lento para que se vea que respira
+    repeat: -1
+  });
+
     // --- Moneda girando ---
     this.anims.create({
       key: 'spin',
@@ -92,6 +115,11 @@ class mainScene {
     this.player = this.physics.add.sprite(100, 100, 'walk1');
     this.player.setScale(1.5);
     this.player.anims.play('walk', true);
+
+    // --- Temporizador de inactividad ---
+    this.idleTimer = 0;           // Contador de tiempo inactivo
+    this.idleThreshold = 3;       // 3 segundos para entrar en idle
+    this.isIdle = false;          // Estado actual (si está dormido o no)
     
     // --- Moneda con animacion ---
     this.coin = this.physics.add.sprite(300, 300, 'coin1');
@@ -123,12 +151,12 @@ _handlePlayerMovement() {
   // Movimiento horizontal
   if (this.arrow.right.isDown) {
     this.player.x += 3;
-    this.player.flipX = true;  // Mirar a la derecha
+    this.player.flipX = true;
     this.lastDirection = 'right';
     isMoving = true;
   } else if (this.arrow.left.isDown) {
     this.player.x -= 3;
-    this.player.flipX = false;   // Mirar a la izquierda
+    this.player.flipX = false;
     this.lastDirection = 'left';
     isMoving = true;
   }
@@ -140,6 +168,27 @@ _handlePlayerMovement() {
   } else if (this.arrow.up.isDown) {
     this.player.y -= 3;
     isMoving = true;
+  }
+  
+  // --- LÓGICA DE INACTIVIDAD ---
+  if (isMoving) {
+    // Si se mueve, reiniciar el temporizador
+    this.idleTimer = 0;
+    
+    // Si estaba dormido, despertar
+    if (this.isIdle) {
+      this.isIdle = false;
+      this.player.anims.play('walk', true);
+    }
+  } else {
+    // Si no se mueve, contar el tiempo
+    this.idleTimer += 1/60;  // 1/60 segundos por frame (60 FPS)
+    
+    // Si pasaron 3 segundos y no está dormido
+    if (this.idleTimer >= this.idleThreshold && !this.isIdle) {
+      this.isIdle = true;
+      this.player.anims.play('sleep', true);
+    }
   }
 }
 
