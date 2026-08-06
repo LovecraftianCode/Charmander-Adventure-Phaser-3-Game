@@ -13,7 +13,7 @@
 
 <img width="966" height="734" alt="Grabación 2026-07-20 233507" src="https://github.com/user-attachments/assets/a596ccfb-a667-4f39-914c-7fe9aea33160" />
 
-**¡Juega ahora!** → [Charmander Adventure en GitHub Pages](https://lovecraftiancode.github.io/Charmander-Adventure---Phaser-3-Game/)
+**¡Juega ahora!** → [Charmander Adventure en GitHub Pages](https://lovecraftiancode.github.io/Charmander-Adventure-Phaser-3-Game/)
 
 ## Tabla de Contenidos
 - [Sobre este proyecto](#sobre-este-proyecto)
