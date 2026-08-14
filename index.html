@@ -7,24 +7,37 @@
     
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.14.0/dist/phaser.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js"></script>  
+    <script src="store.js"></script>
     
     <!-- Estilos -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="game-container">
-        <h1 class="game-title">
-            🔥 <span>Charmander</span> Adventure
-        </h1>
+        <div class="header">
+            <h1 class="game-title">🔥 <span>Charmander</span> Adventure</h1>
+            <button id="storeBtn">🏪 Tienda</button>
+        </div>
         
         <!-- Contenedor del juego -->
         <div id="game"></div>
         
         <p class="game-instructions">
             🎮 Usa las <span class="arrow-keys">flechas</span> para mover a Charmander · 
-            Recolecta las <span class="key">🪙</span> monedas
+            Recolecta los <span class="key">🪙</span> pegecoins
         </p>
+    </div>
+
+    <!-- MODAL DE LA TIENDA -->
+    <div id="storeModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Tienda</h2>
+            <div id="storeContent">
+                <!-- Contenido dinamico -->
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -6,7 +6,7 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)
 
-> **Un juego de plataformas 2D desarrollado con Phaser 3** donde controlas a Charmander para recolectar monedas.  
+> **Un juego de plataformas 2D desarrollado con Phaser 3** donde controlas a Charmander para recolectar pegecoins.  
 > *¡Explora, recolecta y diviértete con este pequeño Pokémon!*
 
 ## Demo en vivo
@@ -31,10 +31,10 @@
 
 ## Sobre este proyecto
 
-Este proyecto es mi versión personal de un juego de colección de monedas desarrollado con **Phaser 3**. El código base y la lógica fundamental fueron desarrollados siguiendo el excelente tutorial de **[Lessmilk](https://www.lessmilk.com/phaser-game-tutorial/)**. 
+Este proyecto es mi versión personal de un juego de colección de pegecoins desarrollado con **Phaser 3**. El código base y la lógica fundamental fueron desarrollados siguiendo el excelente tutorial de **[Lessmilk](https://www.lessmilk.com/phaser-game-tutorial/)**. 
 
 A partir de esa base, he añadido mejoras como:
-- **Animaciones personalizadas** (Charmander caminando y moneda girando)
+- **Animaciones personalizadas** (Charmander caminando y pegecoin girando)
 - **Sistema de dirección** (Charmander voltea al moverse)
 - **Efectos visuales** (tweens al recolectar monedas)
 - **Sistema de puntuación** en tiempo real
@@ -51,8 +51,8 @@ A partir de esa base, he añadido mejoras como:
 
 | Característica | Descripción |
 |----------------|-------------|
-| **Personaje animado** | Charmander camina con 7 frames de animación |
-| **Animación de inactividad** | Charmander se duerme después de 3 segundos sin movimiento (6 frames) |
+| **Personaje animado** | Charmander camina con 10 frames de animación |
+| **Animación de inactividad** | Charmander se duerme después de 3 segundos sin movimiento a 6 frames |
 | **Moneda giratoria** | 12 frames de animación para la moneda |
 | **Movimiento fluido** | Control con teclas de flecha |
 | **Sistema de puntuación** | +10 puntos por cada moneda recolectada |
